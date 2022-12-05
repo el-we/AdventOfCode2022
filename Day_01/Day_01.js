@@ -9,14 +9,6 @@ const elves = fs
     .trim() // remove starting & ending whitespace
     .split('\n\n') // separate each elf package
 
-const calorie_max = () => {
-    const calories = elves.map((elf) => {
-        const calories = elf.split('\n').map(Number);
-        return calories.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-    });
-    console.log(Math.max(...calories));
-}
-
 const calorieCalculator = (elf) =>
     elf
         .split('\n')
@@ -26,5 +18,3 @@ const calorieCalculator = (elf) =>
 const elfCalories = elves.map(calorieCalculator);
 
 console.log(Math.max(...elfCalories));
-
-calorie_max();
