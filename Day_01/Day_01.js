@@ -17,4 +17,13 @@ const calorieCalculator = (elf) =>
 
 const elfCalories = elves.map(calorieCalculator); // sums up calories of all elves packages
 
-console.log(Math.max(...elfCalories)); // returns calories of best elf
+// Task 1 - Return those elfs calories with most calories in his backpack
+// console.log(Math.max(...elfCalories));
+
+// Task 2 - Return the calorie sum of the top 3 elves
+const topOne = Math.max(...elfCalories);
+const topTwo = Math.max(...elfCalories.filter(elf => elf !== topOne));
+const topThree = Math.max(...elfCalories.filter(elf => elf !== topOne && elf !== topTwo));
+const calorieSum = topOne + topTwo + topThree;
+
+console.log(calorieSum);
