@@ -17,4 +17,14 @@ const calorie_max = () => {
     console.log(Math.max(...calories));
 }
 
+const calorieCalculator = (elf) =>
+    elf
+        .split('\n')
+        .map(Number)
+        .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+
+const elfCalories = elves.map(calorieCalculator);
+
+console.log(Math.max(...elfCalories));
+
 calorie_max();
