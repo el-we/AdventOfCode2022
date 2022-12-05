@@ -3,8 +3,68 @@
 const fs = require("fs");
 
 // read text file
-const elves = fs
-    .readFileSync("Day_01_input.txt", { encoding: "utf-8" })
+let rounds = fs
+    .readFileSync("Day_02_input.txt", { encoding: "utf-8" })
     .replace(/\r/g, "") // remove \r characters to avoid problems on windows
     .trim() // remove starting & ending whitespace
-    .split('\n\n') // separate each elf package
+    .split('\n') // separate each round
+
+const inputSplitter = (round) => round.split(' '); // separates each players pick
+rounds = rounds.map(inputSplitter);
+
+/* Logic & Rules
+Add result of match and your choice
+A for Rock, B for Paper, and C for Scissors
+X for Rock, Y for Paper, and Z for Scissors
+1 for Rock, 2 for Paper, and 3 for Scissors
+lose = 0
+draw = 3
+win  = 6
+*/
+
+const pointsCalculator = (rds) => {
+    switch(rds[0]) {
+        // elf takes rock
+        case 'A':
+            // we take rock - draw + rock
+            if (rds[1] === 'X') {
+                return 4;
+                // we take paper - win + paper
+            } else if (rds[1] === 'Y') {
+                return 8;
+                // we take scissors - lose + scissors
+            } else {
+                return 3;
+            }
+        // elf takes paper
+        case 'B':
+            // we take rock - lose + rock
+            if (rds[1] === 'X') {
+                return 1;
+                // we take paper - draw + paper
+            } else if (rds[1] === 'Y') {
+                return 5;
+                // we take scissors - win + scissors
+            } else {
+                return 9;
+            }
+        // elf takes scissors
+        case 'C':
+            // we take rock - win + rock
+            if (rds[1] === 'X') {
+                return 7;
+                // we take paper - lose + paper
+            } else if (rds[1] === 'Y') {
+                return 2;
+                // we take scissors - draw + scissors
+            } else {
+                return 6;
+            }
+    }
+};
+const scoreCalculator = (rounds) => rounds.map(pointsCalculator);
+const scores = scoreCalculator(rounds);
+const totalScoreCalculator = (scores) => scores.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+const totalScore = totalScoreCalculator(scores);
+
+console.log(totalScore);
