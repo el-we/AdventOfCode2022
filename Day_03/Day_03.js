@@ -38,6 +38,5 @@ const priorities = wrongItems.map(getPriority);
 const totalPriorityCalculator = (scores) => scores.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 const totalPriority = totalPriorityCalculator(priorities);
 
-//
 console.log(totalPriority);
 
